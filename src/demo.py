@@ -66,4 +66,8 @@ def load_redemptions(conn, json_path: Path):
 
 if __name__ == "__main__":
     db = init_db("skypoints.db")
-    load
+    load_members(db, Path("data/members.txt"))
+    load_redemptions(db, Path("data/redemptions.json"))
+    print("USA:", [dict(r) for r in db.execute("SELECT * FROM Table_USA")])
+    print("Quarantined:", [dict(r) for r in db.execute("SELECT * FROM quarantine")])
+    print("Redemptions:", [dict(r) for r in db.execute("SELECT * FROM fact_redemptions")])
